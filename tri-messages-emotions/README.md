@@ -139,3 +139,6 @@ python -m pytest api/test_api.py
 - **julien** — API FastAPI
 - **steven** — front, présentation, README
 - **redouane** — logique métier / communication API, vidéo démo
+
+##deploy
+https://huggingface.co/spaces/Steevv/Detecteur_emotions
