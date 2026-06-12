@@ -85,7 +85,7 @@ Exemple de reponse :
 ```json
 {
   "emotion": "joy",
-  "confidence": 0.94
+  "confidence": 0.98
 }
 ```
 
