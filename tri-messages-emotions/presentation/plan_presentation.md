@@ -33,7 +33,7 @@ Entree :
 Sortie :
 
 ```json
-{ "emotion": "joy", "confidence": 0.32 }
+{ "emotion": "joy", "confidence": 0.98 }
 ```
 
 ## 5. Front
