@@ -9,8 +9,14 @@ __pycache__/
 .matplotlib_cache/
 .hf_cache/
 
+# Modele sauvegarde necessaire au deploiement.
+# Attention : model.safetensors est volumineux, il doit etre pousse avec Git LFS.
 data_training/saved_model/*
 !data_training/saved_model/.gitkeep
+!data_training/saved_model/config.json
+!data_training/saved_model/model.safetensors
+!data_training/saved_model/tokenizer.json
+!data_training/saved_model/tokenizer_config.json
 data_training/results/
 data_training/logs/
 data_training/eval_results/
