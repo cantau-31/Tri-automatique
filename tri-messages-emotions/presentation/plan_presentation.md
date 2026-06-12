@@ -1,45 +1,61 @@
-# Plan de presentation
+# plan de présentation — détecteur d'émotions
 
-## 1. Objectif
+## 1. intro (steven)
 
-Classer automatiquement des messages en anglais selon leur emotion.
+- présentation du projet : un détecteur d'émotions sur du texte
+- 6 émotions possibles : joy, sadness, anger, fear, love, surprise
+- dataset `dair-ai/emotion` + DistilBERT fine-tuné
+- annonce du plan : entraînement → API → front → déploiement
 
-## 2. Donnees
+## 2. problématique (steven)
 
-Dataset Hugging Face : `dair-ai/emotion`.
+- contexte : tri manuel de messages impossible à grande échelle
+  (avis clients, tickets support, commentaires)
+- pourquoi ce sujet : cas d'usage concret, dataset adapté au format court,
+  bon exercice de transfer learning sur du texte
+- objectif : un modèle qui marche et qui est déployé, pas un projet
+  ambitieux jamais terminé
 
-Classes principales : sadness, joy, love, anger, fear, surprise.
+## 3. données & entraînement (rayen)
 
-## 3. Modele
+- dataset `dair-ai/emotion` (hugging face), ~20k exemples, 6 classes
+- modèle de base : `distilbert-base-uncased`
+- fine-tuning avec `Trainer` de `transformers`
+- résultats :
+  - accuracy : 91.8%
+  - macro F1 : 0.877
+  - weighted F1 : 0.918
+- montrer la matrice de confusion (`confusion_matrix.png`)
 
-Modele utilise : `distilbert-base-uncased`.
+## 4. API (julien)
 
-Fine-tuning avec `DistilBertTokenizerFast`, `DistilBertForSequenceClassification` et `Trainer`.
+- FastAPI, endpoint `POST /predict`
+- chargement du modèle sauvegardé par rayen
+- entrée : `{ "text": "..." }`
+- sortie : `{ "emotion": "...", "confidence": ... }`
+- tests automatisés avec pytest
 
-## 4. API
+## 5. logique métier (redouane)
 
-API FastAPI avec un endpoint :
+- couche entre le front et l'API
+- gestion des erreurs et du formatage de la réponse
 
-```text
-POST /predict
-```
+## 6. front (steven)
 
-Entree :
+- interface Gradio
+- champ texte → bouton "Analyser" → résultat affiché dans un bloc coloré
+- une couleur par émotion pour une lecture rapide
+- choix de Gradio : rapide à mettre en place, déployable directement sur
+  Hugging Face Spaces, pas de HTML/JS à écrire
 
-```json
-{ "text": "I am happy today" }
-```
+## 7. démo live
 
-Sortie :
+- ouvrir l'app déployée sur Hugging Face Spaces
+- tester plusieurs phrases (positive, négative, neutre)
+- montrer le résultat coloré + score de confiance
 
-```json
-{ "emotion": "joy", "confidence": 0.98 }
-```
+## 8. ce qu'on a appris / conclusion
 
-## 5. Front
-
-Interface Gradio simple qui appelle l'API locale.
-
-## 6. Limites
-
-Le modele de demonstration est entraine rapidement. Pour de meilleurs resultats, lancer un entrainement complet avec `--full-data`.
+- le transfer learning fonctionne bien même sur un format court
+- le déploiement est une étape à part entière, pas un détail
+- chaque membre a tenu son rôle : données → modèle → API → front
