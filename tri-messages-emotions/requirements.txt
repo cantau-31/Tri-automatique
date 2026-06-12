@@ -1,7 +1,14 @@
 fastapi
 uvicorn
 pydantic
+datasets
 transformers
 torch
+accelerate
+scikit-learn
+matplotlib
+seaborn
+gradio
+requests
 pytest
 httpx

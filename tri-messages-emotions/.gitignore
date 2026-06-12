@@ -1,0 +1,16 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.cache/
+.matplotlib_cache/
+.hf_cache/
+
+data_training/saved_model/*
+!data_training/saved_model/.gitkeep
+data_training/results/
+data_training/logs/
+data_training/eval_results/

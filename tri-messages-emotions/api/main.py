@@ -110,7 +110,9 @@ def predict(request: PredictRequest):
         confidence, predicted_class = torch.max(probabilities, dim=1)
 
     predicted_index = predicted_class.item()
-    emotion = current_model.config.id2label[predicted_index]
+    emotion = current_model.config.id2label.get(predicted_index)
+    if emotion is None:
+        emotion = current_model.config.id2label.get(str(predicted_index), str(predicted_index))
 
     return {
         "emotion": emotion,
